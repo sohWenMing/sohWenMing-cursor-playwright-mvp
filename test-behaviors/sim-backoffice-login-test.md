@@ -7,7 +7,7 @@
 This test verifies the complete login and logout flow for the SIM Backoffice application, ensuring users can authenticate with Local login type and access the backoffice dashboard.
 
 ## Starting Point
-- URL: https://dev-simattendance.simge.edu.sg/StudentAppBackOffice/Login
+- URL: Constructed from APP_URL environment variable + `/StudentAppBackOffice/Login`
 - Prerequisites: Valid test credentials stored in `.env` file (TEST_USER_EMAIL and TEST_USER_PASSWORD)
 
 ## Steps

@@ -7,7 +7,7 @@
 This test verifies that users can navigate to the ISO FAQ page after logging into the SIM Backoffice application and that the "Add FAQ" button is visible.
 
 ## Starting Point
-- URL: https://dev-simattendance.simge.edu.sg/StudentAppBackOffice/Login
+- URL: Constructed from APP_URL environment variable + `/StudentAppBackOffice/Login`
 - Prerequisites: Valid test credentials stored in `.env` file (TEST_USER_EMAIL and TEST_USER_PASSWORD)
 
 ## Steps
