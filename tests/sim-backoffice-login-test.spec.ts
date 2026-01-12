@@ -9,7 +9,7 @@ test.describe('SIM Backoffice Login Test', () => {
     await page.goto(process.env.APP_URL + '/StudentAppBackOffice/Login');
     
     // Step 2: Wait until a dropdown that is located under the text "Login Type" is shown on the screen
-    await expect(page.getByText('Failllllll')).toBeVisible();
+    await expect(page.getByText('Login Type')).toBeVisible();
     const loginTypeDropdown = page.locator('#LoginType');
     await expect(loginTypeDropdown).toBeVisible();
     
