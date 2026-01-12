@@ -125,13 +125,68 @@ When user runs tests, parse results and provide:
 ## Self-Healing Workflow
 
 When user triggers a self-heal command:
-1. Read the behavior description from command
+1. Read the behavior description from the referenced behavior file
 2. Read the existing test file to understand current implementation
 3. Use browser plugin to verify behavior is achievable
 4. Generate new test using same protocol as initial generation
 5. Run test to verify it passes
 6. If fails, retry up to 5 times with different approaches
 7. If all attempts fail, report to user for manual intervention
+
+## Test Script Modification Protocol
+
+When user requests direct changes to an existing test file in `tests/*.spec.ts`:
+
+### Step 1: Apply Changes
+Make the requested modifications to the test script.
+
+### Step 2: Execute Test
+Run the modified test to verify it passes:
+```bash
+npx playwright test tests/[test-name].spec.ts
+```
+- If fails: Attempt to fix (max 3 attempts), then report to user
+- If passes: Continue to next step
+
+### Step 3: Prompt Headed Verification
+```
+✓ Test passed!
+
+Since you've modified this test, please verify it visually:
+Run command: "Run Test in Headed Mode" or I can run it for you now.
+
+Would you like me to run the test in headed mode? (yes/no)
+```
+
+### Step 4: Sync Behavior File
+Check if changes affect `test-behaviors/[test-name].md`:
+- Compare the test script changes against the behavior file
+- If behavior-affecting changes detected (e.g., button text, element names, steps), show diff:
+```
+The test changes may require updating the behavior file:
+
+CURRENT:
+[relevant section from behavior file]
+
+PROPOSED:
+[updated section reflecting test changes]
+
+Apply these changes to the behavior file? (yes/no)
+```
+- If user confirms, update the behavior file
+- Update "Last Verified" timestamp in behavior file
+
+### Step 5: Confirm Completion
+```
+✓ Test modification complete!
+
+Changes made:
+- [test file changes summary]
+- [behavior file changes if any]
+
+The self-heal command will now use the updated behavior from:
+test-behaviors/[test-name].md
+```
 
 ## Context7 Integration
 

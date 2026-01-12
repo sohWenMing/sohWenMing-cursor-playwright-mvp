@@ -384,22 +384,15 @@ description: Regenerate the [test-name] test script when it fails but behavior s
 # Self-Heal [Test Name] Test
 
 ⚠️ **IMPORTANT**: Only use this command if you have verified that the 
-behavior described below STILL WORKS when you test it manually in your 
-browser, but the automated test is failing.
+behavior STILL WORKS when you test it manually in your browser, but the 
+automated test is failing.
 
-## Original Behavior (What This Test Should Do)
+## Behavior Reference
 
-### Starting Point
-URL: [startUrl]
+**Read the expected behavior from:** `test-behaviors/[test-name].md`
 
-### Steps
-1. [step 1]
-2. [step 2]  
-3. [step 3]
-...
-
-### Expected Outcome
-[expectedOutcome]
+The behavior file is the single source of truth for what this test should do. 
+All behavior steps, expected outcomes, and special notes are documented there.
 
 ## Test File Location
 `tests/[test-name].spec.ts`
@@ -418,22 +411,26 @@ Do NOT use this command when:
 ## Instructions for Cursor
 
 This is a self-healing workflow. The user has confirmed the behavior 
-above still works correctly, but the test script is failing.
+from the referenced behavior file still works correctly, but the test script is failing.
 
 Your task: Regenerate the test using the SAME protocol as initial 
 test generation:
 
-1. Use browser plugin to verify each step still works
-2. Capture new element refs if they've changed
-3. Generate new Playwright locators (using MCP if available)
-4. Write updated test file
-5. Verify test passes
-6. Maximum 5 regeneration attempts
+1. Read the behavior steps from `test-behaviors/[test-name].md`
+2. Use browser plugin to verify each step still works
+3. Capture new element refs if they've changed
+4. Generate new Playwright locators (using MCP if available)
+5. Write updated test file
+6. Verify test passes
+7. Maximum 5 regeneration attempts
 
 ### Regeneration Protocol
 
 Follow the EXACT same steps as "Generate New E2E Test" command, but:
-- Use the behavior steps defined above
+- Read the behavior steps from `test-behaviors/[test-name].md` (the single source of truth)
+- Overwrite the existing test file: tests/[test-name].spec.ts
+- Update the behavior doc with "Last Verified: [new timestamp]"
+- Report what changed (if you can detect it)
 - Overwrite the existing test file: tests/[test-name].spec.ts
 - Update the behavior doc with "Last Verified: [new timestamp]"
 - Report what changed (if you can detect it)
